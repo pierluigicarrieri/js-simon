@@ -26,19 +26,29 @@ function dateDifference() {
     Integer division ("timeToLesson" / ms in a day) for "daysLeft", 
     then module operator ("timeToLesson" / ms in a day) for "daysLeftRm" 
     to calculate "hoursLeft", rinse and repeat till "secondsLeft". */
-    const daysLeft = Math.floor(timeToLesson / (24*60*60*1000));
+    let daysLeft = Math.floor(timeToLesson / (24*60*60*1000));
 
     const daysLeftRm = timeToLesson % (24*60*60*1000);
 
-    const hoursLeft = Math.floor(daysLeftRm / (60*60*1000));
+    let hoursLeft = Math.floor(daysLeftRm / (60*60*1000));
 
     const hoursLeftRm = timeToLesson % (60*60*1000);
 
-    const minutesLeft = Math.floor(hoursLeftRm / (60*1000));
+    let minutesLeft = Math.floor(hoursLeftRm / (60*1000));
 
     const minutesLeftRm = timeToLesson % (60*1000);
 
-    const secondsLeft = Math.floor(minutesLeftRm / 1000);
+    let secondsLeft = Math.floor(minutesLeftRm / 1000);
+
+    //"If" construct added, puts time to 0 if the target date has passed.
+    if (targetDate - currentDate <= 0) {
+
+        daysLeft = 0;
+        hoursLeft = 0;
+        minutesLeft = 0;
+        secondsLeft = 0;
+
+    }
 
     //Creates a variable formatting the total time left (d:h:m:s).
     const formattedTimeToLesson = `${daysLeft}:${hoursLeft}:${minutesLeft}:${secondsLeft}`;
